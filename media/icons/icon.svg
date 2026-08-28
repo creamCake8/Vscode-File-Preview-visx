@@ -1,0 +1,48 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="128"
+  height="128"
+  viewBox="0 0 128 128"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="3.5"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <defs>
+    <!-- 挖洞 mask：白色区域可见，黑色区域透明 -->
+    <mask id="fishHoleMask">
+      <rect width="128" height="128" fill="white" />
+      <!-- 在放大镜位置挖一个稍小于放大镜的圆洞，留出弧形缝隙 -->
+      <circle cx="94" cy="90" r="18" fill="black" />
+    </mask>
+  </defs>
+
+  <!-- ===== 鱼（被挖了弧形洞） ===== -->
+  <g mask="url(#fishHoleMask)">
+    <!-- 鱼身 -->
+    <ellipse cx="60" cy="64" rx="48" ry="35" />
+
+    <!-- 鱼尾 -->
+    <path d="M16 64 L4 52 L4 76 Z" />
+
+    <!-- 鱼眼 -->
+    <circle cx="84" cy="52" r="7" fill="currentColor" stroke="none" />
+
+    <!-- 鱼嘴 -->
+    <path d="M104 60 Q110 62 104 68" />
+
+    <!-- 背鳍 -->
+    <path d="M50 30 Q56 20 66 30" />
+
+    <!-- 胸鳍 -->
+    <path d="M36 70 Q28 76 38 80" />
+  </g>
+
+  <!-- ===== 放大镜（独立圆圈，与鱼身有弧形缝隙） ===== -->
+  <!-- 放大镜外圈 -->
+  <circle cx="94" cy="90" r="16" />
+
+  <!-- 放大镜手柄 -->
+  <line x1="106" y1="102" x2="118" y2="114" />
+</svg>

@@ -1,0 +1,193 @@
+{
+  "name": "file-preview",
+  "displayName": "File Preview",
+  "description": "本地文件预览扩展，支持 txt 及更多格式",
+  "version": "0.0.5",
+  "publisher": "file-preview",
+  "author": {
+    "name": "owen"
+  },
+  "icon": "media/icons/icon.png",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onView:filePreview.sidebar"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "file-preview",
+          "title": "File Preview",
+          "icon": "media/icons/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "file-preview": [
+        {
+          "type": "tree",
+          "id": "filePreview.sidebar",
+          "name": "文件预览"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "filePreview.open",
+        "title": "File Preview: 打开预览"
+      },
+      {
+        "command": "filePreview.toggleSidebar",
+        "title": "File Preview: 切换侧边栏"
+      },
+      {
+        "command": "filePreview.addFile",
+        "title": "新增文件",
+        "icon": "$(add)",
+        "category": "File Preview"
+      },
+      {
+        "command": "filePreview.deleteFile",
+        "title": "删除",
+        "icon": "$(close)",
+        "category": "File Preview"
+      },
+      {
+        "command": "filePreview.refreshList",
+        "title": "刷新列表",
+        "icon": "$(refresh)",
+        "category": "File Preview"
+      },
+      {
+        "command": "filePreview.openConfig",
+        "title": "File Preview: 打开配置面板",
+        "icon": "$(settings-gear)",
+        "category": "File Preview"
+      },
+      {
+        "command": "filePreview.bossKey",
+        "title": "File Preview: 老板键（显示/隐藏预览）",
+        "category": "File Preview"
+      },
+      {
+        "command": "filePreview.increaseVideoOpacity",
+        "title": "File Preview: 视频透明度 +10",
+        "category": "File Preview"
+      },
+      {
+        "command": "filePreview.decreaseVideoOpacity",
+        "title": "File Preview: 视频透明度 -10",
+        "category": "File Preview"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "filePreview.addFile",
+          "when": "view == filePreview.sidebar",
+          "group": "navigation"
+        },
+        {
+          "command": "filePreview.refreshList",
+          "when": "view == filePreview.sidebar",
+          "group": "navigation"
+        },
+        {
+          "command": "filePreview.openConfig",
+          "when": "view == filePreview.sidebar",
+          "group": "navigation"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "filePreview.deleteFile",
+          "when": "view == filePreview.sidebar && viewItem == fileItem",
+          "group": "inline"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "File Preview",
+      "properties": {
+        "filePreview.fontSize": {
+          "type": "number",
+          "default": 14,
+          "description": "预览区域字体大小（px）"
+        },
+        "filePreview.autoRefresh": {
+          "type": "boolean",
+          "default": true,
+          "description": "文件变更时自动刷新预览"
+        },
+        "filePreview.lineNumbers": {
+          "type": "boolean",
+          "default": true,
+          "description": "预览区域显示行号"
+        },
+        "filePreview.videoOpacity": {
+          "type": "number",
+          "default": 100,
+          "minimum": 0,
+          "maximum": 100,
+          "description": "视频预览透明度（0-100，数值越低越隐蔽）"
+        },
+        "filePreview.videoAutoplay": {
+          "type": "boolean",
+          "default": false,
+          "description": "视频预览自动播放"
+        },
+        "filePreview.videoMuted": {
+          "type": "boolean",
+          "default": true,
+          "description": "视频默认静音播放（静音时自动播放不会被浏览器拦截，需要声音可解除静音或关闭此项）"
+        }
+      }
+    },
+    "keybindings": [
+      {
+        "command": "filePreview.toggleSidebar",
+        "key": "ctrl+shift+f p",
+        "mac": "cmd+shift+f p",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "filePreview.bossKey",
+        "key": "ctrl+shift+h",
+        "mac": "cmd+shift+h"
+      },
+      {
+        "command": "filePreview.increaseVideoOpacity",
+        "key": "ctrl+alt+up",
+        "mac": "cmd+alt+up"
+      },
+      {
+        "command": "filePreview.decreaseVideoOpacity",
+        "key": "ctrl+alt+down",
+        "mac": "cmd+alt+down"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/vscode": "^1.80.0",
+    "typescript": "^5.5.0"
+  },
+  "dependencies": {
+    "mammoth": "^1.12.1",
+    "marked": "^18.0.11",
+    "pdfjs-dist": "^3.11.174",
+    "xlsx": "^0.18.5"
+  }
+}
