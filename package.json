@@ -1,8 +1,8 @@
 {
   "name": "Vscode-File-Preview-visx",
   "displayName": "File Preview",
-  "description": "本地文件预览扩展，支持 txt、md 及更多格式",
-  "version": "0.0.6",
+  "description": "File Preview Extension for VS Code - preview txt, md, pdf, xlsx, docx, video and more",
+  "version": "0.0.7",
   "publisher": "QianChengGao",
   "author": {
     "name": "owen"

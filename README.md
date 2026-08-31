@@ -37,10 +37,10 @@
 
 ### 📋 文件列表管理
 
-- 从资源管理器**拖拽文件**到侧边栏即可添加（VS Code 原生 TreeView 拖放，100% 可靠）
+- 从资源管理器**拖拽文件**到侧边栏即可添加
 - `Ctrl+点击` 多选、`Shift+点击` 范围选择，**批量删除**
 - 文件列表持久化，重启 VS Code 不丢失
-- 只存文件路径，**不动你的文件本体**
+- 只存文件路径，**不动文件本体**
 
 ---
 
@@ -80,60 +80,17 @@ cd file-preview-vscode
 npm install
 ```
 
-用 VS Code 打开项目，按 `F5` 启动扩展开发宿主即可体验。
-
-### 打包 .vsix
-
-```bash
-npm run package        # 生成 .vsix
-code --install-extension file-preview-0.0.5.vsix
-```
-
 ---
 
-## 🔧 工作原理（一句话版）
+## 🔧 工作原理
 
-- **侧边栏**：VS Code 原生 TreeView + TreeDragAndDropController，拖放由工作台直接处理（HTML5 拖放在 webview 里是个坑，我们绕开了）
+- **侧边栏**：VS Code 原生 TreeView + TreeDragAndDropController，拖放由工作台直接处理
 - **预览面板**：单例 WebviewPanel，右侧抽屉式；Markdown 管道在扩展端完成（SheetJS → GFM 表格 → marked → HTML），webview 零依赖
 - **PDF**：pdf.js（本地打包，无 CDN），扩展端读文件 base64 传入，webview 内解析渲染
 - **视频**：扩展宿主启动本地媒体服务（127.0.0.1，支持 Range 分段），webview 走 HTTP 流式播放
 - **老板键**：即刻销毁面板；再按恢复上次预览的文件
 
 ---
-
-## 📁 项目结构
-
-```
-file-preview-vscode/
-├── src/
-│   ├── extension.ts            # 扩展入口，命令注册
-│   ├── sidebar/
-│   │   └── FileTreeProvider.ts # TreeView + 原生拖放 + 批量删除
-│   ├── preview/
-│   │   ├── PreviewPanel.ts     # 预览面板（text/html/excel/pdf/video 多模式）
-│   │   └── ConfigPanel.ts      # 二级配置页（滑块/开关/URL 输入）
-│   ├── services/
-│   │   ├── FileService.ts      # 文件读取 + 格式转换（mammoth/SheetJS/marked）
-│   │   ├── StorageService.ts   # 文件列表持久化（globalState）
-│   │   └── MediaServer.ts      # 本地媒体流服务（Range + token）
-│   ├── types/index.ts          # 消息协议与数据类型
-│   └── utils/path.ts
-├── scripts/verify-convert.js   # 转换管道回归验证脚本
-└── media/icons/                # 活动栏图标
-```
-
----
-
-## 🛠️ 本地开发
-
-```bash
-npm install
-npm run compile     # 编译
-npm run watch       # 监听模式
-node scripts/verify-convert.js   # 文档转换管道回归测试
-```
-
-F5 启动扩展开发宿主调试；webview 内可用 `Ctrl+Shift+I` 打开开发者工具。
 
 **技术栈**：TypeScript · VS Code Extension API · mammoth · SheetJS · marked · pdf.js
 
