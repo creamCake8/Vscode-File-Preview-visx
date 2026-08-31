@@ -1,11 +1,15 @@
 {
-  "name": "file-preview",
+  "name": "Vscode-File-Preview-visx",
   "displayName": "File Preview",
-  "description": "本地文件预览扩展，支持 txt 及更多格式",
+  "description": "本地文件预览扩展，支持 txt、md 及更多格式",
   "version": "0.0.5",
-  "publisher": "file-preview",
+  "publisher": "QianChengGao",
   "author": {
     "name": "owen"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/creamCake8/Vscode-File-Preview-visx.git"
   },
   "icon": "media/icons/icon.png",
   "engines": {
